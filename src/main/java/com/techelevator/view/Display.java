@@ -5,28 +5,35 @@ import java.util.Map;
 import java.util.Scanner;
 
 public class Display {
+    HashMap<String, String[]> vending;
+
+   public Display()
+    {
+        HashMap<String, String[]> vending = new HashMap<String, String[]>();
+    }
+
 
     private File inventory = new File("vendingmachine.csv");
 
-    public HashMap<String, String[]> displayItems()
-    {
-        HashMap<String, String[]> vending = new HashMap<String, String[]>();
 
+    public void displayItems()
+    {
         try(Scanner file = new Scanner(this.inventory))
         {
-
             while(file.hasNextLine())
             {
                 String linetext = file.nextLine();
                 System.out.println(linetext);
                 String[] vendingEntry = linetext.split("\\|");
-                vending.put(vendingEntry[0], new String []{vendingEntry[1], vendingEntry[2], vendingEntry[3]});
+                this.vending.put(vendingEntry[0], new String []{vendingEntry[1], vendingEntry[2], vendingEntry[3]});
             }
         } catch (FileNotFoundException e) {
             e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
         }
+    }
+
+    public HashMap<String, String[]> getVending()
+    {
         return vending;
     }
 }

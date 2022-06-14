@@ -1,18 +1,22 @@
 package com.techelevator.view;
-import java.util.*;
-public class Purchase {
+import com.techelevator.VendingMachineCLI;
 
-    public Object purchaseMenu;
+import java.text.DecimalFormat;
+import java.util.*;
+public class Purchase extends VendingMachineCLI {
+ DecimalFormat df = new DecimalFormat("0.00");
     private Menu menu;
-    private int bal = 0;
+    Balance balance = new Balance();
+
     private static final String MAIN_MENU_FEED_MONEY = "Feed Money";
     private static final String MAIN_MENU_SELECT_PRODUCT= "Select Product";
     private static final String MAIN_MENU_FINISH_TRANSACTION = "Finish Transaction";
     private static final String[] Purchase_MENU_OPTIONS = {MAIN_MENU_FEED_MONEY, MAIN_MENU_SELECT_PRODUCT, MAIN_MENU_FINISH_TRANSACTION};
-    private Scanner in;
+     Scanner in = new Scanner(System.in);
+
 
     public Purchase(Menu menu){
-        this.in = new Scanner(System.in);
+        super(menu);
         this.menu = menu;}
 
 
@@ -24,11 +28,11 @@ public class Purchase {
             if (choice.equals(MAIN_MENU_FEED_MONEY))
             {
                 System.out.println("Input whole dollar amount");
-                Boolean feed = true;
-                while(feed) {
+                while(true) {
                     try {
                         int money = in.nextInt();
-                        feed= feedMoney(money);
+                        if(money ==3){break;}
+                        balance.feedMoney(money);
                         System.out.println("When all money has been added press 3 to return to menu");
 
                     } catch (IllegalArgumentException e) {
@@ -36,40 +40,22 @@ public class Purchase {
                     }
 
                 }
-
-
             }
             else if(choice.equals(MAIN_MENU_SELECT_PRODUCT))
-            {Display display = new Display();
+            {
+                PurchaseItems purchaseItems = new PurchaseItems();
+                Display display = new Display();
                 display.displayItems();
+                purchaseItems.buy();
+
 
             }
             else if(choice.equals(MAIN_MENU_FINISH_TRANSACTION))
             {
-
+                balance.changeReturn(balance.getBal());
+                break;
             }
-            System.out.println("Current Money Provided: $" + bal + ".00");
+            System.out.println("Current Money Provided: $" + df.format(balance.getBal()));
         }
-    }
-
-    private Boolean feedMoney(int money){
-        if(money == 1){bal +=1;}
-        else if(money ==2){bal +=2;}
-            else if(money == 5){bal +=5;}
-        else if(money ==10){bal +=10;}
-        else if(money ==3){return false;}
-            else{
-            System.out.println("input correct whole dollar amount");
-        }
-
-        System.out.println("Current Money Provided: $" + bal + ".00");
-        return true;
-    }
-
-
-
-    public int getBal() {
-
-        return bal;
     }
 }
