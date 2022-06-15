@@ -46,7 +46,9 @@ public class Purchase extends VendingMachineCLI {
                 PurchaseItems purchaseItems = new PurchaseItems();
                 Display display = new Display();
                 display.displayItems();
-                purchaseItems.buy();
+                Scanner scanner = new Scanner(System.in);
+                String input = scanner.nextLine();
+                purchaseItems.buy(input);
 
 
             }

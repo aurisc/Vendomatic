@@ -9,7 +9,7 @@ public class Display {
 
    public Display()
     {
-        HashMap<String, String[]> vending = new HashMap<String, String[]>();
+        displayItems();//testing map construction
     }
 
 
@@ -18,6 +18,7 @@ public class Display {
 
     public void displayItems()
     {
+        vending = new HashMap<String, String[]>();
         try(Scanner file = new Scanner(this.inventory))
         {
             while(file.hasNextLine())
@@ -25,7 +26,7 @@ public class Display {
                 String linetext = file.nextLine();
                 System.out.println(linetext);
                 String[] vendingEntry = linetext.split("\\|");
-                this.vending.put(vendingEntry[0], new String []{vendingEntry[1], vendingEntry[2], vendingEntry[3]});
+                this.vending.put(vendingEntry[0], new String []{vendingEntry[1], vendingEntry[2], vendingEntry[3], String.valueOf(5)});
             }
         } catch (FileNotFoundException e) {
             e.printStackTrace();
@@ -34,6 +35,6 @@ public class Display {
 
     public HashMap<String, String[]> getVending()
     {
-        return vending;
+        return this.vending;
     }
 }
