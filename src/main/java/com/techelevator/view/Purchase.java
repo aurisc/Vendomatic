@@ -5,6 +5,8 @@ import java.text.DecimalFormat;
 import java.util.*;
 public class Purchase extends VendingMachineCLI {
  DecimalFormat df = new DecimalFormat("0.00");
+ PurchaseItems purchaseItems = new PurchaseItems();
+ Display display = new Display();
     private Menu menu;
     Balance balance = new Balance();
 
@@ -43,8 +45,6 @@ public class Purchase extends VendingMachineCLI {
             }
             else if(choice.equals(MAIN_MENU_SELECT_PRODUCT))
             {
-                PurchaseItems purchaseItems = new PurchaseItems();
-                Display display = new Display();
                 display.displayItems();
                 Scanner scanner = new Scanner(System.in);
                 String input = scanner.nextLine();
