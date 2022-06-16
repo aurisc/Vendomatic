@@ -4,7 +4,9 @@ import java.text.DecimalFormat;
 
 public class Balance {
 DecimalFormat df = new DecimalFormat("0.00");
-    private double bal = 0;
+
+    private double bal;
+
     public void feedMoney(int money){
         if(money == 1){bal +=1;}
         else if(money ==2){bal +=2;}
@@ -40,6 +42,7 @@ DecimalFormat df = new DecimalFormat("0.00");
                 moneyLeft -=.05;
             }
         }
+        setBal(0);
         System.out.println("Quarters" + quarters +" Dimes "+ dimes +" Nickels" + nickels);
     }
 
@@ -49,8 +52,9 @@ DecimalFormat df = new DecimalFormat("0.00");
         return bal;
     }
 
-    public double setBal()
+    public double setBal(double used)
     {
+        bal = used;
         return bal;
     }
 }
