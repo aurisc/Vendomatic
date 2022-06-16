@@ -1,24 +1,29 @@
 package com.techelevator.view;
 
 import java.io.FileNotFoundException;
+import java.text.DecimalFormat;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Scanner;
+import java.text.DecimalFormat;
+
 
 public class PurchaseItems {
     Display display = new Display();
     private Menu menu;
     InventoryBuilder inventoryBuilder = new InventoryBuilder();
     String input;
-    Balance balance = new Balance();
-    private double currentBal;
+
+    DecimalFormat df = new DecimalFormat("0.00");
+
+    private double bal;
 
     Map<String, Double> itemMap = new HashMap<>();
     Map<String, String[]> vendingItems = new HashMap<>();
     String[] itemSpecs;
 
     public PurchaseItems() {
-        currentBal = balance.getBal();
+
         setVendingItemsMap();
     }
     public int maxInventory() {
@@ -69,12 +74,10 @@ public class PurchaseItems {
 
     private void purchaseProduct(String choice)
     {
-        currentBal = balance.getBal();
-        System.out.println(currentBal);
-        if (currentBal >= Double.parseDouble(itemSpecs[1]))
+        System.out.println(bal);
+        if (bal >= Double.parseDouble(itemSpecs[1]))
         {
-            currentBal -= Double.parseDouble(itemSpecs[1]);
-            balance.setBal(currentBal);
+            bal -= Double.parseDouble(itemSpecs[1]);
             quantityDecrement();
             if(itemSpecs[2].equals("Chip"))
             {
@@ -93,14 +96,57 @@ public class PurchaseItems {
                 System.out.println("Chew Chew, Yum!");
             }
         }
-        else if (currentBal < Double.parseDouble(itemSpecs[1]))
+        else if (bal < Double.parseDouble(itemSpecs[1]))
         {
             System.out.println("Error insert more money");
         }
     }
+    public void feedMoney(int money){
+        if(money == 1){bal +=1;}
+        else if(money ==2){bal +=2;}
+        else if(money == 5){bal +=5;}
+        else if(money ==10){bal +=10;}
+        else{
+            System.out.println("input correct whole dollar amount");
+        }
 
+        System.out.println("Current Money Provided: $" + df.format(bal) );
+    }
 
-     /* private void itemPurchased() {
-        this.maxInventory = maxInventory - 1;
-    }*/
+    public void changeReturn(double moneyLeft)
+    {
+        int quarters =0;
+        int dimes =0;
+        int nickels=0;
+        while (moneyLeft > 0)
+        {
+            if (moneyLeft -.25 >= 0)
+            {
+                quarters++;
+                moneyLeft -= .25;
+            }
+            else if (moneyLeft -.10 >= 0)
+            {
+                dimes++;
+                moneyLeft -=.10;
+            }
+            else if (moneyLeft - .05 >= 0)
+            {
+                nickels++;
+                moneyLeft -=.05;
+            }
+        }
+        setBal(0);
+        System.out.println("Quarters" + quarters +" Dimes "+ dimes +" Nickels" + nickels);
+    }
+
+    public double getBal()
+    {
+        return bal;
+    }
+
+    public void setBal(double bal)
+    {
+        this.bal = bal;
+    }
 }

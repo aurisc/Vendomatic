@@ -19,42 +19,41 @@ DecimalFormat df = new DecimalFormat("0.00");
         System.out.println("Current Money Provided: $" + df.format(bal) );
     }
 
-    public void changeReturn(double moneyLeft)
-    {
-        int quarters =0;
-        int dimes =0;
-        int nickels=0;
-        while (moneyLeft > 0)
-        {
-            if (moneyLeft -.25 >= 0)
-            {
-                quarters++;
-                moneyLeft -= .25;
-            }
-            else if (moneyLeft -.10 >= 0)
-            {
-                dimes++;
-                moneyLeft -=.10;
-            }
-            else if (moneyLeft - .05 >= 0)
-            {
-                nickels++;
-                moneyLeft -=.05;
-            }
-        }
-        setBal(0);
-        System.out.println("Quarters" + quarters +" Dimes "+ dimes +" Nickels" + nickels);
-    }
+//    public void changeReturn(double moneyLeft)
+//    {
+//        int quarters =0;
+//        int dimes =0;
+//        int nickels=0;
+//        while (moneyLeft > 0)
+//        {
+//            if (moneyLeft -.25 >= 0)
+//            {
+//                quarters++;
+//                moneyLeft -= .25;
+//            }
+//            else if (moneyLeft -.10 >= 0)
+//            {
+//                dimes++;
+//                moneyLeft -=.10;
+//            }
+//            else if (moneyLeft - .05 >= 0)
+//            {
+//                nickels++;
+//                moneyLeft -=.05;
+//            }
+//        }
+//        setBal(0);
+//        System.out.println("Quarters" + quarters +" Dimes "+ dimes +" Nickels" + nickels);
+//    }
 
 
-    public double getBal()
-    {
-        return bal;
-    }
-
-    public double setBal(double used)
-    {
-        bal = used;
-        return bal;
-    }
+//    public double getBal()
+//    {
+//        return bal;
+//    }
+//
+//    public void setBal(double bal)
+//    {
+//        this.bal = bal;
+//    }
 }

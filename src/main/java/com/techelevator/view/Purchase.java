@@ -8,7 +8,7 @@ public class Purchase extends VendingMachineCLI {
  PurchaseItems purchaseItems = new PurchaseItems();
  Display display = new Display();
     private Menu menu;
-    Balance balance = new Balance();
+    PurchaseItems puchaseItems = new PurchaseItems();
 
     private static final String MAIN_MENU_FEED_MONEY = "Feed Money";
     private static final String MAIN_MENU_SELECT_PRODUCT= "Select Product";
@@ -34,7 +34,7 @@ public class Purchase extends VendingMachineCLI {
                     try {
                         int money = in.nextInt();
                         if(money ==3){break;}
-                        balance.feedMoney(money);
+                        purchaseItems.feedMoney(money);
                         System.out.println("When all money has been added press 3 to return to menu");
 
                     } catch (IllegalArgumentException e) {
@@ -54,10 +54,10 @@ public class Purchase extends VendingMachineCLI {
             }
             else if(choice.equals(MAIN_MENU_FINISH_TRANSACTION))
             {
-                balance.changeReturn(balance.getBal());
+                purchaseItems.changeReturn(purchaseItems.getBal());
                 break;
             }
-            System.out.println("Current Money Provided: $" + df.format(balance.getBal()));
+            System.out.println("Current Money Provided: $" + df.format(purchaseItems.getBal()));
         }
     }
 }
