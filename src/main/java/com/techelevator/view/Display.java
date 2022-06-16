@@ -7,10 +7,6 @@ import java.util.Scanner;
 public class Display {
 
 
-   public Display()
-    {
-        displayItems();//testing map construction
-    }
 
 
     private File inventory = new File("vendingmachine.csv");
@@ -30,6 +26,4 @@ public class Display {
             e.printStackTrace();
         }
     }
-
-
 }

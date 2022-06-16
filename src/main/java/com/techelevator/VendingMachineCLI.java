@@ -17,6 +17,7 @@ public class VendingMachineCLI {
 
 	InventoryBuilder inventoryBuilder = new InventoryBuilder();
 
+
 	public VendingMachineCLI(Menu menu) {
 		this.menu = menu;
 	}
