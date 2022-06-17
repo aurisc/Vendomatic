@@ -4,16 +4,16 @@ import com.techelevator.VendingMachineCLI;
 import java.text.DecimalFormat;
 import java.util.*;
 public class Purchase extends VendingMachineCLI {
- DecimalFormat df = new DecimalFormat("0.00");
- PurchaseItems purchaseItems = new PurchaseItems();
- Display display = new Display();
+    DecimalFormat df = new DecimalFormat("0.00");
+    PurchaseItems purchaseItems = new PurchaseItems();
+    Display display = new Display();
     private Menu menu;
 
     private static final String MAIN_MENU_FEED_MONEY = "Feed Money";
     private static final String MAIN_MENU_SELECT_PRODUCT= "Select Product";
     private static final String MAIN_MENU_FINISH_TRANSACTION = "Finish Transaction";
     private static final String[] Purchase_MENU_OPTIONS = {MAIN_MENU_FEED_MONEY, MAIN_MENU_SELECT_PRODUCT, MAIN_MENU_FINISH_TRANSACTION};
-     Scanner in = new Scanner(System.in);
+    Scanner in = new Scanner(System.in);
 
 
     public Purchase(Menu menu){

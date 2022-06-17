@@ -53,12 +53,12 @@ public class PurchaseItems {
                 String type = values[2];
                 String quantity = values[3];
 
-               this.itemSpecs = new String[]{name, price, type, quantity};
+                this.itemSpecs = new String[]{name, price, type, quantity};
             }
         }
         if (itemSpecs == null)
         {
-           System.out.println("The code entered does not exist\n");
+            System.out.println("The code entered does not exist\n");
         }
         else
         {
@@ -75,44 +75,44 @@ public class PurchaseItems {
     private void purchaseProduct(String choice)
     {
         try (FileWriter fw = new FileWriter("src/main/java/com/techelevator/log/Log.txt", true )) {
-        System.out.println(bal);
-        if (bal >= Double.parseDouble(itemSpecs[1]) && Integer.parseInt(itemSpecs[3]) > 0)
-        {
-            quantityDecrement();
-            if(itemSpecs[2].equals("Chip"))
+            System.out.println(bal);
+            if (bal >= Double.parseDouble(itemSpecs[1]) && Integer.parseInt(itemSpecs[3]) > 0)
             {
-                System.out.println("Crunch Crunch, Yum!");
+                quantityDecrement();
+                if(itemSpecs[2].equals("Chip"))
+                {
+                    System.out.println("Crunch Crunch, Yum!");
+                }
+                if(itemSpecs[2].equals("Candy"))
+                {
+                    System.out.println("Munch Munch, Yum!");
+                }
+                if(itemSpecs[2].equals("Drink"))
+                {
+                    System.out.println("Glug Glug, Yum!");
+                }
+                if(itemSpecs[2].equals("Gum"))
+                {
+                    System.out.println("Chew Chew, Yum!");
+                }
+                fw.write(LocalDateTime.now()+" "+itemSpecs[0]+" "+ choice.toUpperCase()+" $"+getBal()+" -> $"+
+                        (getBal() - Double.parseDouble(itemSpecs[1]))+"\n");
+                bal -= Double.parseDouble(itemSpecs[1]);
+                fw.close();
             }
-            if(itemSpecs[2].equals("Candy"))
+            else if (bal < Double.parseDouble(itemSpecs[1]))
             {
-                System.out.println("Munch Munch, Yum!");
+                fw.write(LocalDateTime.now()+" "+itemSpecs[0]+" "+ choice.toUpperCase()+" $"+df.format(getBal())+" -> $"+
+                        df.format (getBal() - Double.parseDouble(itemSpecs[1]))+"\n");
+                System.out.println("Error insert more money");
             }
-            if(itemSpecs[2].equals("Drink"))
+            else if (Integer.parseInt(itemSpecs[3]) == 0)
             {
-                System.out.println("Glug Glug, Yum!");
+                System.out.println("The item chosen is currently out of stock.");
             }
-            if(itemSpecs[2].equals("Gum"))
-            {
-                System.out.println("Chew Chew, Yum!");
-            }
-            fw.write(LocalDateTime.now()+" "+itemSpecs[0]+" "+ choice.toUpperCase()+" $"+getBal()+" -> $"+
-                    (getBal() - Double.parseDouble(itemSpecs[1]))+"\n");
-            bal -= Double.parseDouble(itemSpecs[1]);
-            fw.close();
-        }
-        else if (bal < Double.parseDouble(itemSpecs[1]))
-        {
-            fw.write(LocalDateTime.now()+" "+itemSpecs[0]+" "+ choice.toUpperCase()+" $"+df.format(getBal())+" -> $"+
-                   df.format (getBal() - Double.parseDouble(itemSpecs[1]))+"\n");
-            System.out.println("Error insert more money");
-        }
-        else if (Integer.parseInt(itemSpecs[3]) == 0)
-        {
-            System.out.println("The item chosen is currently out of stock.");
-        }
         }
         catch (IOException e) {
-        e.printStackTrace();
+            e.printStackTrace();
         }
     }
     public void feedMoney(int money){
