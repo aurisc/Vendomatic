@@ -1,12 +1,11 @@
 package com.techelevator.view;
-import com.techelevator.VendingMachineCLI;
+import com.techelevator.view.VendingMachineCLI;
 
 import java.text.DecimalFormat;
 import java.util.*;
 public class Purchase extends VendingMachineCLI {
     DecimalFormat df = new DecimalFormat("0.00");
     PurchaseItems purchaseItems = new PurchaseItems();
-    Display display = new Display();
     private Menu menu;
 
     private static final String MAIN_MENU_FEED_MONEY = "Feed Money";
@@ -36,15 +35,16 @@ public class Purchase extends VendingMachineCLI {
                         purchaseItems.feedMoney(money);
                         System.out.println("When all money has been added press 3 to return to menu");
 
-                    } catch (IllegalArgumentException e) {
+                    } catch (IllegalArgumentException | InputMismatchException e) {
                         System.out.println("incorrect dollar amount");
+                        break;
                     }
 
                 }
             }
             else if(choice.equals(MAIN_MENU_SELECT_PRODUCT))
             {
-                display.displayItems();
+                purchaseItems.displayItems();
                 Scanner scanner = new Scanner(System.in);
                 String input = scanner.nextLine();
                 purchaseItems.buy(input);

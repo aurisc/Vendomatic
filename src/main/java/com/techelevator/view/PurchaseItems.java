@@ -12,15 +12,16 @@ import java.text.DecimalFormat;
 
 
 public class PurchaseItems {
-    Display display = new Display();
-    private Menu menu;
+        private Menu menu;
     InventoryBuilder inventoryBuilder = new InventoryBuilder();
-    String input;
+    Products products;
+        String input;
     DecimalFormat df = new DecimalFormat("0.00");
     private double bal;
     Map<String, String[]> vendingItems = new HashMap<>();
     String[] itemSpecs;
     String[] itemDisplay;
+    List<Products> productsList = inventoryBuilder.getProdList();
 
 
 
@@ -38,7 +39,6 @@ public class PurchaseItems {
     public void buy(String input) {
         this.input = input;
         mapInfo(input);
-        System.out.println("\n"+getBal()+"\n");
     }
     private void  mapInfo(String input) {
         this.itemSpecs = null;
@@ -67,9 +67,14 @@ public class PurchaseItems {
             System.out.println(" Item name: " + itemSpecs[0] + " Item Price: " + itemSpecs[1] + " item quantity: " + itemSpecs[3]);
         }
     }
-    private void quantityDecrement () {
+    private void quantityDecrement (String choice) {
         itemSpecs[3] = String.valueOf(Integer.parseInt(itemSpecs[3]) - 1);
+        choice = choice.toUpperCase();
+        for(Products product : productsList) {
+            if (choice.equals(product.getSlot()))
+                  product.setQuantity(product.getQuantity() - 1);
 
+        }
     }
 
     private void purchaseProduct(String choice)
@@ -78,7 +83,7 @@ public class PurchaseItems {
             System.out.println(bal);
             if (bal >= Double.parseDouble(itemSpecs[1]) && Integer.parseInt(itemSpecs[3]) > 0)
             {
-                quantityDecrement();
+                quantityDecrement(choice);
                 if(itemSpecs[2].equals("Chip"))
                 {
                     System.out.println("Crunch Crunch, Yum!");
@@ -134,9 +139,7 @@ public class PurchaseItems {
 
     public void changeReturn(double moneyLeft)
     {
-        System.out.println(moneyLeft);
-        moneyLeft = Double.parseDouble(df.format(moneyLeft));
-        System.out.println(moneyLeft);
+        moneyLeft = (moneyLeft*100)/100;
         int quarters =0;
         int dimes =0;
         int nickels=0;
@@ -157,11 +160,10 @@ public class PurchaseItems {
                 nickels++;
                 moneyLeft -=.05;
             }
-            else if (moneyLeft >= 0 && moneyLeft < .05) break;
-
+            else if (moneyLeft > 0 && moneyLeft < .05) {break;}
         }
         setBal(0);
-        System.out.println("Quarters" + quarters +" Dimes "+ dimes +" Nickels" + nickels);
+        System.out.println("Quarters " + quarters +" Dimes "+ dimes +" Nickels " + nickels);
 
         try (FileWriter fw = new FileWriter("src/main/java/com/techelevator/log/Log.txt", true )) {
             fw.write(LocalDateTime.now() + "GIVE CHANGE: $" + moneyLeft +" -> $"+ getBal()+"\n");
@@ -182,15 +184,9 @@ public class PurchaseItems {
 
     public void displayItems()
     {
-        for (Map.Entry<String, String[]> items : vendingItems.entrySet())
-        {
-            String[] values = items.getValue();
-
-            String name = values[0];
-            String price = values[1];
-            String quantity = values[3];
-            this.itemDisplay = new String[]{name, price, quantity};
-            System.out.println(Arrays.toString(itemDisplay));
-        }
+        for(Products products: productsList){
+               System.out.println(products.getSlot() + " | "+ products.getName() +" | "
+                       + products.getPrice() + " | " + products.getQuantity());
+            }
     }
 }

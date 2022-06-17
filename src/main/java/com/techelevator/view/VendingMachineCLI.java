@@ -1,4 +1,4 @@
-package com.techelevator;
+package com.techelevator.view;
 import java.io.*;
 
 import com.techelevator.view.*;
@@ -12,7 +12,6 @@ public class VendingMachineCLI {
     PurchaseItems purchaseItems = new PurchaseItems();
     private Menu menu;
 
-    InventoryBuilder inventoryBuilder = new InventoryBuilder();
 
 
     public VendingMachineCLI(Menu menu) {
@@ -20,7 +19,6 @@ public class VendingMachineCLI {
     }
 
     public void run() {
-        inventoryBuilder.makeInventory();
         while (true) {
             String choice = (String) menu.getChoiceFromOptions(MAIN_MENU_OPTIONS);
 
@@ -38,6 +36,8 @@ public class VendingMachineCLI {
     }
 
     public static void main(String[] args) {
+        InventoryBuilder inventoryBuilder = new InventoryBuilder();
+        inventoryBuilder.makeInventory();
         Menu menu = new Menu(System.in, System.out);
         VendingMachineCLI cli = new VendingMachineCLI(menu);
         cli.run();
