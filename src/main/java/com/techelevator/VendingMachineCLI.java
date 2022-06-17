@@ -1,10 +1,7 @@
 package com.techelevator;
 import java.io.*;
 
-import com.techelevator.view.Display;
-import com.techelevator.view.InventoryBuilder;
-import com.techelevator.view.Menu;
-import com.techelevator.view.Purchase;
+import com.techelevator.view.*;
 
 public class VendingMachineCLI {
 
@@ -12,7 +9,7 @@ public class VendingMachineCLI {
 	private static final String MAIN_MENU_OPTION_PURCHASE = "Purchase";
 	private static final String MAIN_MENU_OPTION_EXIT = "Exit";
 	private static final String[] MAIN_MENU_OPTIONS = { MAIN_MENU_OPTION_DISPLAY_ITEMS, MAIN_MENU_OPTION_PURCHASE, MAIN_MENU_OPTION_EXIT };
-
+	PurchaseItems purchaseItems = new PurchaseItems();
 	private Menu menu;
 
 	InventoryBuilder inventoryBuilder = new InventoryBuilder();
@@ -29,8 +26,7 @@ public class VendingMachineCLI {
 
 			if (choice.equals(MAIN_MENU_OPTION_DISPLAY_ITEMS)) {
 				// display vending machine items
-				Display display = new Display();
-				display.displayItems();
+				purchaseItems.displayItems();
 			} else if (choice.equals(MAIN_MENU_OPTION_PURCHASE)) {
 				// do purchase
 				Purchase purchase = new Purchase(this.menu);

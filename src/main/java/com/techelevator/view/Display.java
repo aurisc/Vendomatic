@@ -5,7 +5,6 @@ import java.util.Map;
 import java.util.Scanner;
 
 public class Display {
-
     private File inventory = new File("vendingmachine.csv");
 
 
