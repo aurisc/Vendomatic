@@ -1,11 +1,15 @@
 package com.techelevator.view;
-
+/*
+Used to build to a custom product list
+ */
 public class Products {
     String slot;
     String name;
     double price;
     String type;
     String quantity;
+
+
     Products(String slot, String name, double price, String type, String quantity){
         this.slot= slot;
         this.name = name;
@@ -15,7 +19,7 @@ public class Products {
 
     }
 
-    public String getSlot() {
+     public String getSlot() {
         return slot;
     }
 
