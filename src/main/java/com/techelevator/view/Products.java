@@ -5,8 +5,8 @@ public class Products {
     String name;
     double price;
     String type;
-    int quantity;
-    Products(String slot, String name, double price, String type, int quantity){
+    String quantity;
+    Products(String slot, String name, double price, String type, String quantity){
         this.slot= slot;
         this.name = name;
         this.price = price;
@@ -47,11 +47,11 @@ public class Products {
         this.type = type;
     }
 
-    public int getQuantity() {
+    public String getQuantity() {
         return quantity;
     }
 
-    public void setQuantity(int quantity) {
+    public void setQuantity(String quantity) {
         this.quantity = quantity;
     }
 }

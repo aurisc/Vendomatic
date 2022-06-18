@@ -13,11 +13,14 @@ public class Purchase extends VendingMachineCLI {
     private static final String MAIN_MENU_FINISH_TRANSACTION = "Finish Transaction";
     private static final String[] Purchase_MENU_OPTIONS = {MAIN_MENU_FEED_MONEY, MAIN_MENU_SELECT_PRODUCT, MAIN_MENU_FINISH_TRANSACTION};
     Scanner in = new Scanner(System.in);
+    private List<Products> myList;
 
 
-    public Purchase(Menu menu){
+    public Purchase(Menu menu, List<Products> myList){
         super(menu);
-        this.menu = menu;}
+        this.menu = menu;
+        this.myList=myList;
+    }
 
 
     public void purchaseMenu()
@@ -44,12 +47,10 @@ public class Purchase extends VendingMachineCLI {
             }
             else if(choice.equals(MAIN_MENU_SELECT_PRODUCT))
             {
-                purchaseItems.displayItems();
+                purchaseItems.displayItems(myList);
                 Scanner scanner = new Scanner(System.in);
                 String input = scanner.nextLine();
-                purchaseItems.buy(input);
-
-
+                purchaseItems.buy(input,myList );
             }
             else if(choice.equals(MAIN_MENU_FINISH_TRANSACTION))
             {
