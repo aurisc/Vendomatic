@@ -29,7 +29,7 @@ public class InventoryBuilder {
                 this.prodList.add(products);
             }
         } catch (FileNotFoundException e) {
-            e.printStackTrace();
+            System.out.println("try another file");
         }
     }
     public List<Products> getProdList() {return prodList;}

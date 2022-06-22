@@ -62,6 +62,7 @@ public class PurchaseItems {
         else
         {
             try (FileWriter fw = new FileWriter("src/main/java/com/techelevator/log/Log.txt", true )) {
+                    //checks balance against price and if quantity is not out of stock
                 if (bal >= Double.parseDouble(itemSpecs[1]) && !itemSpecs[3].equals("OUT OF STOCK"))
                 {
                     //decrements the quantity and displays OUT OF STOCK if it reaches 0
@@ -115,7 +116,7 @@ public class PurchaseItems {
                 }
             }
             catch (IOException e) {
-                e.printStackTrace();
+                System.out.println("can't write on file");
             }
             //prints name, price, and money the user has remaining
             System.out.println(" Item name: " + itemSpecs[0] + " Item Price: " +
@@ -142,7 +143,7 @@ public class PurchaseItems {
             fw.write(time+" Feed Money: $"+df.format(money)+" -> $"+ df.format(getBal())+"\n");
             fw.close();
         } catch (IOException e) {
-            e.printStackTrace();
+            System.out.println("can't write on file");
         }
         //informs user of amount added
         System.out.println("Current Money Provided: $" + df.format(bal) );
@@ -180,7 +181,7 @@ public class PurchaseItems {
             fw.write(time + " GIVE CHANGE: $" + df.format(logMoney) + " -> Quarters " + quarters + " Dimes " + dimes + " Nickels "
                     + nickels + "\n");
         } catch (IOException e) {
-            e.printStackTrace();
+            System.out.println("can't write on file");
         }
 
         //sets balances to zero
